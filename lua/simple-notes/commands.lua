@@ -123,10 +123,14 @@ local function extract_primary_heading(buf)
   }
 end
 
-local function build_filename(stamp, topic)
+local function build_filename(stamp, topic, opts)
+  opts = opts or {}
+  if opts.from_heading and stamp then
+    stamp = stamp:gsub("%.", "_"):gsub(":", "-")
+  end
   local stamp_part = sanitize_fragment(stamp)
   local topic_part = sanitize_fragment(topic)
-  local name = string.format("note-%s-%s%s", stamp_part, topic_part, NOTE_EXTENSION)
+  local name = string.format("note_%s-%s%s", stamp_part, topic_part, NOTE_EXTENSION)
   local path = vim.fs.joinpath(cwd(), name)
   return vim.fs.normalize(path)
 end
@@ -180,7 +184,7 @@ function M.note_convert_to()
       topic = topic,
     }
   end
-  local filename = build_filename(heading.stamp, heading.topic)
+  local filename = build_filename(heading.stamp, heading.topic, { from_heading = true })
   if not write_buffer(buf, filename) then
     return
   end
