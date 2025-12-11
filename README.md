@@ -7,6 +7,7 @@ A focused Neovim plugin for timestamped note taking inside `.note` buffers (opti
 - Guided workflows for new notes, topic headings, sub-headings, and TOC maintenance.
 - Always prompts before the plugin writes to disk (toggleable).
 - Optional support for native Markdown (`*.md`) buffers.
+- Auto-configures Neoformat (if installed) so Prettier formats `.note` buffers as Markdown.
 
 ## Requirements
 - Neovim 0.11.0 or newer
@@ -57,6 +58,13 @@ Default normal-mode mappings are only applied if the slot is free, and descripti
 - `<leader>nct` → `:NoteConvertTo` (`simple-[n]otes: [c]onvert [t]o`)
 - `<leader>nt` → `:NoteTocUpdate` (`simple-[n]otes: refresh [t]oc`)
 Remap or clear them in your config if you prefer different bindings.
+
+## Neoformat Integration
+If Neoformat is available (`:Neoformat` exists) and you have not overridden `neoformat_markdown_prettier`, the plugin configures it to run:
+```bash
+prettier --stdin-filepath <file> --parser markdown
+```
+This makes Prettier treat `.note` files as Markdown without extra setup. Define `g:neoformat_markdown_prettier` yourself to opt out.
 
 ## Workflow
 1. `:NoteNew` prompts for a topic, creates a file in the directory where Neovim was launched, and opens it in a new tab.
