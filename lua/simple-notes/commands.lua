@@ -269,7 +269,11 @@ local function replace_toc(buf, headings)
     table.insert(block, "")
   end
   if start_idx and end_idx then
-    vim.api.nvim_buf_set_lines(buf, start_idx - 1, end_idx, false, block)
+    local replace_end = end_idx
+    if lines[end_idx + 1] == "" then
+      replace_end = end_idx + 1
+    end
+    vim.api.nvim_buf_set_lines(buf, start_idx - 1, replace_end, false, block)
   elseif #block > 0 then
     local insert_pos = 0
     local first = lines[1]
