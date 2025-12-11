@@ -12,7 +12,6 @@ local M = {
 local augroup = vim.api.nvim_create_augroup("SimpleNotes", { clear = true })
 local commands_registered = false
 local keymaps_set = false
-local neoformat_configured = false
 
 local default_keymaps = {
   { mode = "n", lhs = "<leader>nn", rhs = commands.note_new, desc = "simple-[n]otes: new [n]ote" },
@@ -105,33 +104,12 @@ local function setup_keymaps()
   keymaps_set = true
 end
 
-local function setup_neoformat()
-  if neoformat_configured then
-    return
-  end
-  if vim.fn.exists(":Neoformat") == 0 then
-    return
-  end
-  if vim.g.neoformat_markdown_prettier == nil then
-    vim.g.neoformat_markdown_prettier = {
-      exe = "prettier",
-      args = { "--stdin-filepath", "%:p", "--parser", "markdown" },
-      stdin = 1,
-    }
-  end
-  if vim.g.neoformat_enabled_markdown == nil then
-    vim.g.neoformat_enabled_markdown = { "prettier" }
-  end
-  neoformat_configured = true
-end
-
 function M.setup(opts)
   config.setup(opts)
   setup_filetypes()
   setup_autocmds()
   setup_commands()
   setup_keymaps()
-  setup_neoformat()
   return M
 end
 
