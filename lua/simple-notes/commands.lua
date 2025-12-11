@@ -2,7 +2,7 @@ local config = require("simple-notes.config")
 
 local M = {}
 
-local NOTE_EXTENSION = ".notes"
+local NOTE_EXTENSION = ".note"
 local TOC_START = "<!-- simple-notes:toc:start -->"
 local TOC_END = "<!-- simple-notes:toc:end -->"
 

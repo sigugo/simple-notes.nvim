@@ -21,7 +21,7 @@ local default_keymaps = {
 }
 
 local function tracked_patterns()
-  local patterns = { "*.notes" }
+  local patterns = { "*.note" }
   if config.options.use_md then
     table.insert(patterns, "*.md")
   end
@@ -31,7 +31,7 @@ end
 local function mark_buffer(buf)
   vim.b[buf].simple_notes_active = true
   local name = vim.api.nvim_buf_get_name(buf)
-  if name:match("%.notes$") then
+  if name:match("%.note$") then
     vim.bo[buf].filetype = "markdown"
   end
 end

@@ -1,9 +1,9 @@
 # simple-notes.nvim
 
-A focused Neovim plugin for timestamped note taking inside `.notes` buffers (optionally `.md`). It creates structured headings, keeps a table of contents fresh, and politely asks before touching the filesystem.
+A focused Neovim plugin for timestamped note taking inside `.note` buffers (optionally `.md`). It creates structured headings, keeps a table of contents fresh, and politely asks before touching the filesystem.
 
 ## Features
-- Treats `*.notes` files as Markdown while leaving other Markdown plugins untouched.
+- Treats `*.note` files as Markdown while leaving other Markdown plugins untouched.
 - Guided workflows for new notes, topic headings, sub-headings, and TOC maintenance.
 - Always prompts before the plugin writes to disk (toggleable).
 - Optional support for native Markdown (`*.md`) buffers.
@@ -35,20 +35,20 @@ require("simple-notes").setup({
 ```
 
 ### Headline Formats
-- `filename_format` shapes `note_<stamp>-topic.notes`.
+- `filename_format` shapes `note_<stamp>-topic.note`.
 - `primary_heading_format` is used in `# Note - <stamp> - TOPIC`.
 - `note_heading_format` is used for `## <stamp> |` sub-headlines.
 
 ## Commands
 | Command | Default Map | Description |
 | --- | --- | --- |
-| `:NoteNew` | `<leader>nn` | Prompt for a topic, create `<cwd>/note_<timestamp>-<topic>.notes`, insert heading, open in new tab. |
+| `:NoteNew` | `<leader>nn` | Prompt for a topic, create `<cwd>/note_<timestamp>-<topic>.note`, insert heading, open in new tab. |
 | `:NoteAddTopic` | — | Prompt for a topic and ensure the primary heading exists (no save). |
 | `:NoteConvertTo` | `<leader>nct` | Rename current note using the heading’s timestamp/topic. Prompts for heading first if missing. |
 | `:NoteAdd` | `<leader>na` | Append `## <timestamp> |` (plus a trailing space for typing) at EOF and place the cursor for writing. |
 | `:NoteTocUpdate` | `<leader>nt` | Build/refresh a Markdown TOC linking to all `##` headings. Runs on save when `auto_toc_on_save = true`. |
 
-Commands other than `:NoteNew` operate only on buffers tagged as simple-notes (matching `*.notes` by default, `*.md` when `use_md = true`).
+Commands other than `:NoteNew` operate only on buffers tagged as simple-notes (matching `*.note` by default, `*.md` when `use_md = true`).
 
 ## Keymaps
 Default normal-mode mappings are only applied if the slot is free, and descriptions highlight mnemonic letters:
