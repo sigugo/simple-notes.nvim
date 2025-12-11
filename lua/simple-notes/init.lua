@@ -14,10 +14,10 @@ local commands_registered = false
 local keymaps_set = false
 
 local default_keymaps = {
-  { mode = "n", lhs = "<leader>nn", rhs = commands.note_new, desc = "simple-notes: new note" },
-  { mode = "n", lhs = "<leader>na", rhs = commands.note_add, desc = "simple-notes: add entry" },
-  { mode = "n", lhs = "<leader>nct", rhs = commands.note_convert_to, desc = "simple-notes: convert" },
-  { mode = "n", lhs = "<leader>nt", rhs = commands.note_toc_update, desc = "simple-notes: refresh toc" },
+  { mode = "n", lhs = "<leader>nn", rhs = commands.note_new, desc = "simple-[n]otes: new [n]ote" },
+  { mode = "n", lhs = "<leader>na", rhs = commands.note_add, desc = "simple-[n]otes: [a]dd entry" },
+  { mode = "n", lhs = "<leader>nct", rhs = commands.note_convert_to, desc = "simple-[n]otes: [c]onvert [t]itle" },
+  { mode = "n", lhs = "<leader>nt", rhs = commands.note_toc_update, desc = "simple-[n]otes: refresh [t]oc" },
 }
 
 local function tracked_patterns()

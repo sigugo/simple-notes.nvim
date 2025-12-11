@@ -51,11 +51,11 @@ require("simple-notes").setup({
 Commands other than `:NoteNew` operate only on buffers tagged as simple-notes (matching `*.notes` by default, `*.md` when `use_md = true`).
 
 ## Keymaps
-Default normal-mode mappings are only applied if the slot is free:
-- `<leader>nn` → `:NoteNew`
-- `<leader>na` → `:NoteAdd`
-- `<leader>nct` → `:NoteConvertTo`
-- `<leader>nt` → `:NoteTocUpdate`
+Default normal-mode mappings are only applied if the slot is free, and descriptions highlight mnemonic letters:
+- `<leader>nn` → `:NoteNew` (`simple-[n]otes: new [n]ote`)
+- `<leader>na` → `:NoteAdd` (`simple-[n]otes: [a]dd entry`)
+- `<leader>nct` → `:NoteConvertTo` (`simple-[n]otes: [c]onvert [t]itle`)
+- `<leader>nt` → `:NoteTocUpdate` (`simple-[n]otes: refresh [t]oc`)
 Remap or clear them in your config if you prefer different bindings.
 
 ## Workflow
