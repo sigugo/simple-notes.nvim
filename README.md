@@ -4,6 +4,7 @@ A focused Neovim plugin for timestamped note taking inside `.note` buffers (opti
 
 ## Features
 - Treats `*.note` files as Markdown (via `vim.filetype.add`) while leaving other Markdown plugins untouched.
+- Maintains a header block bounded by `<!-- simple-notes:header:start/end -->` for TOCs or other metadata.
 - Guided workflows for new notes, topic headings, sub-headings, and TOC maintenance.
 - Always prompts before the plugin writes to disk (toggleable).
 - Optional support for native Markdown (`*.md`) buffers.
@@ -46,9 +47,9 @@ require("simple-notes").setup({
 | `:NoteAddTopic` | — | Prompt for a topic and ensure the primary heading exists (no save). |
 | `:NoteConvertTo` | `<leader>nct` | Rename current note using the heading’s timestamp/topic. Prompts for heading first if missing. |
 | `:NoteAdd` | `<leader>na` | Append `## <timestamp> |` (plus a trailing space for typing) at EOF and place the cursor for writing. |
-| `:NoteTocUpdate` | `<leader>nt` | Build/refresh a Markdown TOC linking to all `##` headings. Runs on save when `auto_toc_on_save = true`. |
+| `:NoteTocUpdate` | `<leader>nt` | Build/refresh a Markdown TOC linking to all `##` headings (excluding those inside the header block). Runs on save when `auto_toc_on_save = true`. |
 
-Commands other than `:NoteNew` operate only on buffers tagged as simple-notes (matching `*.note` by default, `*.md` when `use_md = true`).
+Commands other than `:NoteNew` operate only on buffers tagged as simple-notes (matching `*.note` by default, `*.md` when `use_md = true`). The generated Table of Contents lives between `<!-- simple-notes:header:start -->` / `<!-- simple-notes:header:end -->`; any `##` headings inside that block are ignored so the TOC never references itself.
 
 ## Keymaps
 Default normal-mode mappings are only applied if the slot is free, and descriptions highlight mnemonic letters:

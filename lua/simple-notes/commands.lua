@@ -3,8 +3,8 @@ local config = require("simple-notes.config")
 local M = {}
 
 local NOTE_EXTENSION = ".note"
-local TOC_START = "<!-- simple-notes:toc:start -->"
-local TOC_END = "<!-- simple-notes:toc:end -->"
+local TOC_START = "<!-- simple-notes:header:start -->"
+local TOC_END = "<!-- simple-notes:header:end -->"
 
 local function notify(msg, level)
   vim.notify("simple-notes.nvim: " .. msg, level or vim.log.levels.INFO)
@@ -229,10 +229,17 @@ end
 local function collect_subheadings(buf)
   local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
   local headings = {}
+  local in_header_block = false
   for idx, line in ipairs(lines) do
-    local text = line:match("^##%s+(.+)$")
-    if text then
-      table.insert(headings, { line = text, slug = slugify_heading(text), idx = idx })
+    if line == TOC_START then
+      in_header_block = true
+    elseif line == TOC_END then
+      in_header_block = false
+    elseif not in_header_block then
+      local text = line:match("^##%s+(.+)$")
+      if text then
+        table.insert(headings, { line = text, slug = slugify_heading(text), idx = idx })
+      end
     end
   end
   return headings
