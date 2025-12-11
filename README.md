@@ -3,7 +3,7 @@
 A focused Neovim plugin for timestamped note taking inside `.note` buffers (optionally `.md`). It creates structured headings, keeps a table of contents fresh, and politely asks before touching the filesystem.
 
 ## Features
-- Treats `*.note` files as Markdown while leaving other Markdown plugins untouched.
+- Treats `*.note` files as Markdown (via `vim.filetype.add`) while leaving other Markdown plugins untouched.
 - Guided workflows for new notes, topic headings, sub-headings, and TOC maintenance.
 - Always prompts before the plugin writes to disk (toggleable).
 - Optional support for native Markdown (`*.md`) buffers.

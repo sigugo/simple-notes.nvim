@@ -20,6 +20,8 @@ local default_keymaps = {
   { mode = "n", lhs = "<leader>nt", rhs = commands.note_toc_update, desc = "simple-[n]otes: refresh [t]oc" },
 }
 
+local filetypes_registered = false
+
 local function tracked_patterns()
   local patterns = { "*.note" }
   if config.options.use_md then
@@ -34,6 +36,18 @@ local function mark_buffer(buf)
   if name:match("%.note$") then
     vim.bo[buf].filetype = "markdown"
   end
+end
+
+local function setup_filetypes()
+  if filetypes_registered then
+    return
+  end
+  vim.filetype.add({
+    extension = {
+      note = "markdown",
+    },
+  })
+  filetypes_registered = true
 end
 
 local function setup_autocmds()
@@ -92,6 +106,7 @@ end
 
 function M.setup(opts)
   config.setup(opts)
+  setup_filetypes()
   setup_autocmds()
   setup_commands()
   setup_keymaps()
